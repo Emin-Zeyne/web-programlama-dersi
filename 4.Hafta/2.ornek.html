@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Create Object from JSON String</h2>
+
+<p id="demo"></p>
+
+<script>
+let text = '{"employees":[' +
+'{"firstName":"John","lastName":"Doe" },' +
+'{"firstName":"AMIN","lastName":"ZENA" },' +
+'{"firstName":"Peter","lastName":"Jones" }]}';
+
+const obj = JSON.parse(text);
+
+document.getElementById("demo").innerHTML =
+obj.employees[1].firstName + " " + obj.employees[1].lastName;
+</script>
+
+<h2>Access a JavaScript object</h2>
+<p id="demo"></p>
+
+<script>
+const myObj = {name:"AMIN", age:30, city:"New York"};
+document.getElementById("demo").innerHTML = myObj.name;
+</script>
+
+<h1>JavaScript JSON</h1>
+<h2>Creating an Object from JSON</h2>
+
+<p id="demo"></p>
+
+<script>
+const txt = '{"name":"AMIN", "age":20, "city":"New York"}'
+const myObj = JSON.parse(txt);
+
+document.getElementById("demo").innerHTML = myObj.name + ", " + myObj.age;
+</script>
+
+
+<h2>Convert a string into a date object.</h2>
+<p id="demo"></p>
+
+<script>
+const text = '{"name":"AMIN", "birth":"2005-01-01", "city":"ALEPPO"}';
+const obj = JSON.parse(text);
+obj.birth = new Date(obj.birth);
+document.getElementById("demo").innerHTML = obj.name + ", " + obj.birth; 
+</script>
+
+<h1>JavaScript JSON</h1>
+<h2>Create a JSON string from ant object.</h2>
+<p id="demo"></p>
+
+<script>
+const myObj = {name: "AMIN", age: 20, city: "ALEPPO"};
+const myJSON = JSON.stringify(myObj);
+
+document.getElementById("demo").innerHTML = myJSON;
+</script>
+
+<h2>Looping JavaScript Object Values</h2>
+<p id="demo"></p>
+
+<script>
+const myJSON = '{"name":"AMIN", "age":20, "car":null}';
+const myObj = JSON.parse(myJSON);
+
+let text = "";
+for (const x in myObj) {
+  text += myObj[x] + ", ";
+}
+document.getElementById("demo").innerHTML = text;
+</script>
+
+<h2>Looping Object Properties</h2>
+<p id="demo"></p>
+
+<script>
+const myJSON = '{"name":"John", "age":30, "car":null}';
+const myObj = JSON.parse(myJSON);
+
+let text = "";
+for (const x in myObj) {
+  text += x + ", ";
+}
+document.getElementById("demo").innerHTML = text;
+</script>
+
+<h2>Convert a JSON string into a JavaScript object.</h2>
+
+<p id="demo"></p>
+
+<script>
+const myJSON = '{"name":"AMIN", "age":20, "city":"ALEPPO"}';
+const myObj = JSON.parse(myJSON);
+document.getElementById("demo").innerHTML = myObj.name;
+</script>
+
+<h2>Get JSON Data from a PHP Server</h2>
+<p id="demo"></p>
+
+<script>
+const xmlhttp = new XMLHttpRequest();
+
+xmlhttp.onload = function() {
+  const myObj = JSON.parse(this.responseText);
+  document.getElementById("demo").innerHTML = myObj.name;
+}
+xmlhttp.open("GET", "demo_file.php");
+xmlhttp.send();
+</script>
+
+
+<h2>Use HTTP POST to Get JSON Data from a PHP Server</h2>
+
+<p id="demo"></p>
+
+<script>
+const dbParam = JSON.stringify({"limit":10});
+const xmlhttp = new XMLHttpRequest();
+xmlhttp.onload = function() {
+  myObj = JSON.parse(this.responseText);
+  let text = "";
+  for (let x in myObj) {
+    text += myObj[x].name + "<br>";
+  }
+  document.getElementById("demo").innerHTML = text;
+}
+xmlhttp.open("POST", "json_demo_db_post.php");
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send("x=" + dbParam);
+</script>
+
+<p>Try changing the "limit" property from 10 to 5.</p>
+
+<h2>Get JSON Data from a PHP Server</h2>
+<p>Convert the data into a JavaScript array:</p>
+<p id="demo"></p>
+
+<script>
+const xmlhttp = new XMLHttpRequest();
+xmlhttp.onload = function() {
+  const myObj = JSON.parse(this.responseText);
+  document.getElementById("demo").innerHTML = myObj[2];
+}
+xmlhttp.open("GET", "demo_file_array.php");
+xmlhttp.send();
+</script>
+
+<h2>Make a table based on JSON data.</h2>
+
+<p id="demo"></p>
+
+
+<select id="myselect" onchange="change_myselect(this.value)">
+  <option value="">Choose an option:</option>
+  <option value="customers">Customers</option>
+  <option value="products">Products</option>
+  <option value="suppliers">Suppliers</option>
+</select>
+
+<p id="demo"></p>
+
+<script>
+function change_myselect(sel) {
+  const dbParam = JSON.stringify({table:sel,limit:20});
+  const xmlhttp = new XMLHttpRequest();
+  xmlhttp.onload = function() {
+    myObj = JSON.parse(this.responseText);
+    text = "<table border='1'>"
+    for (x in myObj) {
+      text += "<tr><td>" + myObj[x].name + "</td></tr>";
+    }
+    text += "</table>"    
+    document.getElementById("demo").innerHTML = text;
+  }
+  xmlhttp.open("POST", "json_demo_html_table.php", true);
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.send("x=" + dbParam);
+}
+</script>
+
+<h2>Click the Button.</h2>
+<p>A script tag with a src attribute is created and placed in the document.</p>
+<p>The PHP file returns a call to a function with the JSON object as a parameter.</p>
+
+<button onclick="clickButton()">Click me!</button>
+
+<p id="demo"></p>
+
+<script>
+function clickButton() {
+  let s = document.createElement("script");
+  s.src = "demo_jsonp.php";
+  document.body.appendChild(s);
+}
+
+function myFunc(myObj) {
+  document.getElementById("demo").innerHTML = myObj.name;
+}
+</script>
+</body>
+</html>
