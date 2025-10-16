@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f7f7f7;
+  }
+  
+  .image-gallery {
+    margin-top: 40px;
+  }
+  
+  .big-image img {
+    width: 400px;
+    height: 250px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .thumbs img {
+    width: 70px;
+    height: 50px;
+    margin: 10px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .thumbs img:hover {
+    border-color: #007bff;
+  }
+  
